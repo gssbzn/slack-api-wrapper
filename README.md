@@ -1,4 +1,4 @@
-Slack API Wrapper [![Build Status](https://travis-ci.org/gssbzn/slack-api-wrapper.svg)](https://travis-ci.org/gssbzn/slack-api-wrapper) 
+Slack API Wrapper [![Build Status](https://travis-ci.org/gssbzn/slack-api-wrapper.svg)](https://travis-ci.org/gssbzn/slack-api-wrapper)
 =========================
 
 A library that provides a plain function-call interface to the Slack API web endpoints.
@@ -20,6 +20,8 @@ Or install it yourself as:
 ## Usage
 
 TODO: Write usage instructions here
+
+You can see a demo here [slack-web-test](https://github.com/gssbzn/slack-web-test)
 
 ## Contributing
 

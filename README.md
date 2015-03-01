@@ -1,4 +1,4 @@
-Slack API Wrapper
+Slack API Wrapper [![Build Status](https://travis-ci.org/gssbzn/slack-api-wrapper.svg)](https://travis-ci.org/gssbzn/slack-api-wrapper) 
 =========================
 
 A library that provides a plain function-call interface to the Slack API web endpoints.

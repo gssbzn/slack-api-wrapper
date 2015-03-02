@@ -13,7 +13,6 @@ module Slack
       if oauth2_access_token.is_a?(String)
         @session = OAuth2Session.new(oauth2_access_token)
       else
-        puts "ALGO"
         raise ArgumentError.new("oauth2_access_token doesn't have a valid type")
       end
     end

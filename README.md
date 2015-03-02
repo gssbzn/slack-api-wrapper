@@ -3,6 +3,9 @@ Slack API Wrapper [![Build Status](https://travis-ci.org/gssbzn/slack-api-wrappe
 
 A library that provides a plain function-call interface to the Slack API web endpoints.
 
+This a work in progress, many API endpoint implementations are still missing,
+I expect to add them as soon as possible or you can help by making a pull request.
+
 ## Installation
 
 Add this line to your application's Gemfile:

@@ -5,7 +5,11 @@ describe Slack::Client do
     client = Slack::Client.new("")
     expect(client).not_to be nil
   end
-  it 'Validate token is string' do
+  it 'Validates token is string' do
     expect{Slack::Client.new(1)}.to raise_error(ArgumentError)
+  end
+  it 'Validates unimplemented methods' do
+    client = Slack::Client.new("")
+    expect{client.groups_open("")}.to raise_error(Slack::Web::NotImplementedError)
   end
 end

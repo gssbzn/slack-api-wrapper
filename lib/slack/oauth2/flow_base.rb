@@ -14,9 +14,7 @@ module Slack
         unless scope.is_a?(String)
           raise ArgumentError, "scope must be a String, got #{scope.inspect}"
         end
-        unless team.is_a?(String)
-          raise ArgumentError, "team must be a String, got #{team.inspect}"
-        end
+
         @consumer_key = consumer_key
         @consumer_secret = consumer_secret
         @scope = scope

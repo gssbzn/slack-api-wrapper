@@ -1,7 +1,11 @@
+# Copyright (c) 2015 Gustavo Bazan
+# MIT License
+
 module Slack
 
-  class OAuth2Session # :nodoc:
+  class Session # :nodoc:
 
+    # @param [String] oauth2_access_token user token
     def initialize(oauth2_access_token)
       unless oauth2_access_token.is_a?(String)
         raise "bad type for oauth2_access_token (expecting String)"
@@ -11,7 +15,7 @@ module Slack
 
     private
 
-    def build_url(path)
+    def build_url(path) # :nodoc:
       host = Slack::WEB_SERVER
       full_path = "/api/#{path}"
       URI::HTTPS.build({host: host, path: full_path})
@@ -38,7 +42,7 @@ module Slack
       do_http(uri, Net::HTTP::Get.new(uri.request_uri))
     end
 
-    def do_http_with_body(uri, request, body)
+    def do_http_with_body(uri, request, body) # :nodoc:
       if body != nil
         if body.is_a?(Hash)
           request.set_form_data(Slack::clean_params(body))

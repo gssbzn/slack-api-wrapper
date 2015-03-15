@@ -1,9 +1,12 @@
+# Copyright (c) 2015 Gustavo Bazan
+# MIT License
+
 require 'uri'
 
 module Slack
-  module OAuth2
+  module Oauth2
     # Base class for the OAuth 2 authorization helpers.
-    class FlowBase  # :nodoc:
+    class FlowBase
       def initialize(consumer_key, consumer_secret, scope, team)
         unless consumer_key.is_a?(String)
           raise ArgumentError, "consumer_key must be a String, got #{consumer_key.inspect}"

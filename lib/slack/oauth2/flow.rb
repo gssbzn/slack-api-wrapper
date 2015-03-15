@@ -1,20 +1,27 @@
+# Copyright (c) 2015 Gustavo Bazan
+# MIT License
+
 require 'securerandom'
 
 require_relative 'flow_base'
 
 module Slack
-  module OAuth2
-    # The standard OAuth 2 authorization helper.  Use this if you're writing a web app.
+  module Oauth2
+    # The standard OAuth 2 authorization helper.
     class Flow < FlowBase
 
-      # * consumer_key: Your Slack API app's "app key"
-      # * consumer_secret: Your Slack API app's "app secret"
-      # * redirect_uri: The URI that the Slack server will redirect the user to after the user
+      # @param [String] consumer_key
+      #   Your Slack API app's "app key"
+      # @param [String] consumer_secret
+      #   Your Slack API app's "app secret"
+      # @param [String] redirect_uri
+      #   The URI that the Slack server will redirect the user to after the user
       #   finishes authorizing your app.  This URI  must be HTTPs-based and pre-registered with
       #   the Slack servers.
-      # * session: A hash that represents the current web app session (will be used to save the CSRF
-      #   token)
-      # * csrf_token_key: The key to use when storing the CSRF token in the session (for example,
+      # @param [Hash] session
+      #   represents the current web app session (will be used to save the CSRF token)
+      # @param [Object] csrf_token_key
+      #   The key to use when storing the CSRF token in the session (for example,
       #   :slack_auth_csrf_token)
       def initialize(consumer_key, consumer_secret, redirect_uri, scope, team, session, csrf_token_session_key)
         super(consumer_key, consumer_secret, scope, team)
@@ -36,10 +43,11 @@ module Slack
       # you provided to the constructor.  This CSRF token will be checked on finish() to prevent
       # request forgery.
       #
-      # * url_state: Any data you would like to keep in the URL through the authorization
+      # @param [String] url_state
+      #   Any data you would like to keep in the URL through the authorization
       #   process.  This exact value will be returned to you by finish().
       #
-      # Returns the URL to redirect the user to.
+      # @return Returns the URL to redirect the user to.
       def start(url_state=nil)
         unless url_state.nil? or url_state.is_a?(String)
           raise ArgumentError, "url_state must be a String"
@@ -57,18 +65,20 @@ module Slack
       # Call this after the user has visited the authorize URL (see: start()), approved your app,
       # and was redirected to your redirect URI.
       #
-      # * query_params: The query params on the GET request to your redirect URI.
+      # @param [Hash] query_params
+      #   The query params on the GET request to your redirect URI.
       #
-      # Returns a tuple of (access_token, scope, url_state).  access_token can be used to
-      # construct a SlackClient.  scpe is the Slack scope the user that jsut approved
-      # your app.  url_state is the value you originally passed in to start().
+      # @return Returns a tuple of (access_token, scope, url_state).  access_token can be used to
+      #   construct a SlackClient.  scpe is the Slack scope the user that jsut approved
+      #   your app.  url_state is the value you originally passed in to start().
       #
-      # Can throw BadRequestError, BadStateError, CsrfError, NotApprovedError,
-      # ProviderError.
+      # @raise [BadRequestError]
+      # @raise [BadStateError]
+      # @raise [CsrfError]
+      # @raise [NotApprovedError]
+      # @raise [ProviderError]
       def finish(query_params)
         csrf_token_from_session = @session[@csrf_token_session_key]
-
-        # Check well-formedness of request.
 
         # Check well-formedness of request.
 

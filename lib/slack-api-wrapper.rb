@@ -8,11 +8,26 @@ require_relative "slack/session"
 require_relative "slack/oauth2"
 require_relative "slack/client"
 
-module Slack # :nodoc:
+# Copyright (c) 2015 Gustavo Bazan
+# MIT License
+#
+# The module that contains everything Slack-related:
+#
+# * {Slack::Client} is the class used to interact with the slack end points.
+# * {Slack::Error} is raised when Slack encounters an error.
+# * {Slack::Oauth2} handles oauth2 authentication.
+#
+module Slack
+  # Slack url
   WEB_SERVER = 'slack.com'
-  API_SERVER = "#{WEB_SERVER}/api"
+  # Slack api path
+  API_SERVER = 'slack.com/api'
 
+  # Removes nil params
   #
+  # @param [Hash] params
+  #   API call arguments
+  # @return [Hash]
   def self.clean_params(params)
     r = {}
     params.each do |k,v|
@@ -21,15 +36,24 @@ module Slack # :nodoc:
     r
   end
 
+  # Convert params to query string
   #
+  # @param [Hash] params
+  #   API call arguments
+  # @return [String]
   def self.make_query_string(params)
     clean_params(params).collect {|k,v|
       CGI.escape(k) + "=" + CGI.escape(v)
     }.join("&")
   end
 
-  #
-  def self.do_http(uri, request) # :nodoc:
+  # Handle http requests
+  # @param [URI::HTTPS] uri
+  #   API uri
+  # @param [Object] request
+  #   request object
+  # @return [Net::HTTPResponse]
+  def self.do_http(uri, request)
 
     http = Net::HTTP.new(uri.host, uri.port)
 
@@ -47,7 +71,11 @@ module Slack # :nodoc:
 
   # Parse response. You probably shouldn't be calling this directly.  This takes responses from the server
   # and parses them.  It also checks for errors and raises exceptions with the appropriate messages.
-  def self.parse_response(response, raw=false) # :nodoc:
+  # @param [Net::HTTPResponse] response
+  # @param [Boolean] raw if return raw data
+  # @raise [SlackError]
+  # @raise [SlackAuthError]
+  def self.parse_response(response, raw=false)
     if response.kind_of?(Net::HTTPServerError)
       raise SlackError.new("Slack Server Error: #{response} - #{response.body}", response)
     elsif response.kind_of?(Net::HTTPUnauthorized)
@@ -58,8 +86,10 @@ module Slack # :nodoc:
       rescue
         raise SlackError.new("Slack Server Error: body=#{response.body}", response)
       end
-      unless d['ok'] == true
-        raise SlackError.new(d['ok'], response)
+      if d['error']
+        raise SlackError.new(d['error'], response)
+      else
+        raise SlackError.new(response.body, response)
       end
     end
 
@@ -75,6 +105,9 @@ module Slack # :nodoc:
   # A string comparison function that is resistant to timing attacks.  If you're comparing a
   # string you got from the outside world with a string that is supposed to be a secret, use
   # this function to check equality.
+  # @param [String] a
+  # @param [String] b
+  # @return [Boolean] whether the strings are equal
   def self.safe_string_equals(a, b)
     if a.length != b.length
       false

@@ -1,3 +1,7 @@
+# Copyright (c) 2015 Gustavo Bazan
+# MIT License
+
+require_relative 'web/api'
 require_relative 'web/auth'
 require_relative 'web/channels'
 require_relative 'web/chat'
@@ -12,7 +16,9 @@ require_relative 'web/users'
 require_relative 'error'
 
 module Slack
+  # Web endpoints methods
   module Web
+    include Api
     include Auth
     include Channels
     include Chat
@@ -24,6 +30,5 @@ module Slack
     include Search
     include Team
     include Users
-
   end
 end

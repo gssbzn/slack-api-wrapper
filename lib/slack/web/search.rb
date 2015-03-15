@@ -4,18 +4,24 @@ module Slack
       SCOPE = "search"
 
       # Searches for messages and files matching a query.
-      def search_all(query, sort, sort_dir, highlight, count, page)
-        raise NotImplementedError.new("Not yet implemented, feel free to make a pull request")
+      def search_all(params={})
+        throw ArgumentError.new("Required arguments :query missing") if params['query'].nil?
+        response = @session.do_get "#{SCOPE}.all", params
+        Slack::parse_response(response)
       end
 
       # Searches for files matching a query.
-      def search_files(query, sort, sort_dir, highlight, count, page)
-        raise NotImplementedError.new("Not yet implemented, feel free to make a pull request")
+      def search_files(params={})
+        throw ArgumentError.new("Required arguments :query missing") if params['query'].nil?
+        response = @session.do_get "#{SCOPE}.files", params
+        Slack::parse_response(response)
       end
 
       # Searches for messages matching a query.
-      def search_messages(query, sort, sort_dir, highlight, count, page)
-        raise NotImplementedError.new("Not yet implemented, feel free to make a pull request")
+      def search_messages(params={})
+        throw ArgumentError.new("Required arguments :query missing") if params['query'].nil?
+        response = @session.do_get "#{SCOPE}.messages", params
+        Slack::parse_response(response)
       end
 
     end

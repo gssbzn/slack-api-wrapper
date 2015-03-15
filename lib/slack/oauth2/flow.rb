@@ -80,11 +80,11 @@ module Slack
 
         error = query_params['error']
 
-        unless (error.nil? || code.nil?)
+        unless error.nil? || code.nil?
           raise BadRequestError.new("Query parameters 'code' and 'error' are both set;" +
           " only one must be set.")
         end
-        if error.nil? and code.nil?
+        if error.nil? && code.nil?
           raise BadRequestError.new("Neither query parameter 'code' or 'error' is set.")
         end
 

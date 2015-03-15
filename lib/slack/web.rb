@@ -7,6 +7,7 @@ require_relative 'web/groups'
 require_relative 'web/im'
 require_relative 'web/search'
 require_relative 'web/stars'
+require_relative 'web/team'
 require_relative 'web/users'
 require_relative 'error'
 
@@ -21,8 +22,8 @@ module Slack
     include Im
     include Stars
     include Search
+    include Team
     include Users
 
-    class NotImplementedError < Exception; end
   end
 end

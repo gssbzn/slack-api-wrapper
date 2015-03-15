@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
         A library that provides a plain function-call interface to the
         Slack API web endpoints.
     EOF
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/gssbzn/slack-api-wrapper"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

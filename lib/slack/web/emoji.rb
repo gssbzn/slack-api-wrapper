@@ -4,8 +4,8 @@ module Slack
       SCOPE = "emoji"
 
       # Lists custom emoji for a team.
-      def emoji_list
-        response = @session.do_get "#{SCOPE}.list"
+      def emoji_list(params={})
+        response = @session.do_get "#{SCOPE}.list", params
         Slack::parse_response(response)
       end
     end

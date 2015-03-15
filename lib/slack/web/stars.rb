@@ -1,11 +1,12 @@
 module Slack
   module Web
     module Stars
-      SCOPE = "users"
+      SCOPE = "stars"
 
       # Lists stars for a user.
-      def stars_list(user, count, page)
-        raise Slack::Error("Not yet implemented, feel free to make a pull request")
+      def stars_list(params={})
+        response = @session.do_get "#{SCOPE}.list", params
+        Slack::parse_response(response)
       end
 
     end

@@ -4,38 +4,27 @@ module Slack
       SCOPE = "chat"
 
       # Deletes a message.
-      def chat_delete(ts, channel)
-        param = {
-          "ts" => ts,
-          "channel" => channel
-        }
-        response = @session.do_get "#{SCOPE}.delete", param
+      def chat_delete(params = {})
+        throw ArgumentError.new("Required arguments :ts missing") if params['ts'].nil?
+        throw ArgumentError.new("Required arguments :channel missing") if params['channel'].nil?
+        response = @session.do_get "#{SCOPE}.delete", params
         Slack::parse_response(response)
       end
 
       # Sends a message to a channel.
-      def chat_post_message(channel, text, username, as_user= false, parse, link_names, attachments)
-        param = {
-          "channel" => channel,
-          "text" => text,
-          "username" => username,
-          "as_user" => as_user,
-          "parse" => parse,
-          "link_names" => link_names,
-          "attachments" => attachments
-        }
-        response = @session.do_get "#{SCOPE}.postMessage", param
+      def chat_post_message(params = {})
+        throw ArgumentError.new("Required arguments :channel missing") if params['channel'].nil?
+        throw ArgumentError.new("Required arguments :text missing") if params['text'].nil?
+        response = @session.do_get "#{SCOPE}.postMessage", params
         Slack::parse_response(response)
       end
 
       # Updates a message.
-      def chat_update(ts, channel, text)
-        param = {
-          "ts" => ts,
-          "channel" => channel,
-          "text" => text
-        }
-        response = @session.do_get "#{SCOPE}.update", param
+      def chat_update(params = {})
+        throw ArgumentError.new("Required arguments :ts missing") if params['ts'].nil?
+        throw ArgumentError.new("Required arguments :channel missing") if params['channel'].nil?
+        throw ArgumentError.new("Required arguments :text missing") if params['text'].nil?
+        response = @session.do_get "#{SCOPE}.update", params
         Slack::parse_response(response)
       end
 

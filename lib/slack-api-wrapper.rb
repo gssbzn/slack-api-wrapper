@@ -49,7 +49,7 @@ module Slack # :nodoc:
   # and parses them.  It also checks for errors and raises exceptions with the appropriate messages.
   def self.parse_response(response, raw=false) # :nodoc:
     if response.kind_of?(Net::HTTPServerError)
-      raise Slack.new("Slack Server Error: #{response} - #{response.body}", response)
+      raise SlackError.new("Slack Server Error: #{response} - #{response.body}", response)
     elsif response.kind_of?(Net::HTTPUnauthorized)
       raise SlackAuthError.new("User is not authenticated.", response)
     elsif !response.kind_of?(Net::HTTPSuccess)
@@ -58,10 +58,8 @@ module Slack # :nodoc:
       rescue
         raise SlackError.new("Slack Server Error: body=#{response.body}", response)
       end
-      if d['error']
-        raise SlackError.new(d['error'], response)
-      else
-        raise SlackError.new(response.body, response)
+      unless d['ok'] == true
+        raise SlackError.new(d['ok'], response)
       end
     end
 

@@ -7,7 +7,7 @@ module Slack
     # Post chat messages to Slack.
     module Chat
       # Endpoint scope
-      SCOPE = "chat"
+      SCOPE = 'chat'
 
       # Deletes a message.
       #
@@ -19,11 +19,11 @@ module Slack
       #   Channel containing the message to be deleted.
       #
       # @see https://api.slack.com/methods/chat.delete
-      def chat_delete(params={})
-        raise ArgumentError.new("Required arguments 'ts' missing") if params['ts'].nil?
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        response = @session.do_get "#{SCOPE}.delete", params
-        Slack::parse_response(response)
+      def chat_delete(params = {})
+        fail ArgumentError, "Required arguments 'ts' missing" if params['ts'].nil?
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        response = @session.do_post "#{SCOPE}.delete", params
+        Slack.parse_response(response)
       end
 
       # Sends a message to a channel.
@@ -54,11 +54,11 @@ module Slack
       #   emoji to use as the icon for this message. Overrides `icon_url`.
       #
       # @see https://api.slack.com/methods/chat.postMessage
-      def chat_post_message(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'text' missing") if params['text'].nil?
-        response = @session.do_get "#{SCOPE}.postMessage", params
-        Slack::parse_response(response)
+      def chat_post_message(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'text' missing" if params['text'].nil?
+        response = @session.do_post "#{SCOPE}.postMessage", params
+        Slack.parse_response(response)
       end
 
       # Updates a message.
@@ -73,14 +73,13 @@ module Slack
       #   New text for the message, using the default formatting rules.
       #
       # @see https://api.slack.com/methods/chat.update
-      def chat_update(params={})
-        raise ArgumentError.new("Required arguments 'ts' missing") if params['ts'].nil?
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'text' missing") if params['text'].nil?
-        response = @session.do_get "#{SCOPE}.update", params
-        Slack::parse_response(response)
+      def chat_update(params = {})
+        fail ArgumentError, "Required arguments 'ts' missing" if params['ts'].nil?
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'text' missing" if params['text'].nil?
+        response = @session.do_post "#{SCOPE}.update", params
+        Slack.parse_response(response)
       end
-
     end
   end
 end

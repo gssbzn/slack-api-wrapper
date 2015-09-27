@@ -7,7 +7,7 @@ module Slack
     # Get info on files uploaded to Slack, upload new files to Slack.
     module Files
       # Endpoint scope
-      SCOPE = "files"
+      SCOPE = 'files'
 
       # Deletes a file.
       #
@@ -17,10 +17,10 @@ module Slack
       #   ID of file to delete.
       #
       # @see https://api.slack.com/methods/files.delete
-      def files_delete(params={})
-        raise ArgumentError.new("Required arguments 'file' missing") if params['file'].nil?
-        response = @session.do_get "#{SCOPE}.delete", params
-        Slack::parse_response(response)
+      def files_delete(params = {})
+        fail ArgumentError, "Required arguments 'file' missing" if params['file'].nil?
+        response = @session.do_post "#{SCOPE}.delete", params
+        Slack.parse_response(response)
       end
 
       # Gets information about a team file.
@@ -35,10 +35,10 @@ module Slack
       #   Page number of results to return.
       #
       # @see https://api.slack.com/methods/files.info
-      def files_info(params={})
-        raise ArgumentError.new("Required arguments :file missing") if params['file'].nil
-        response = @session.do_get "#{SCOPE}.info", params
-        Slack::parse_response(response)
+      def files_info(params = {})
+        fail ArgumentError, "Required arguments 'file' missing" if params['file'].nil?
+        response = @session.do_post "#{SCOPE}.info", params
+        Slack.parse_response(response)
       end
 
       # Lists & filters team files.
@@ -69,9 +69,9 @@ module Slack
       #   Page number of results to return.
       #
       # @see https://api.slack.com/methods/files.list
-      def files_list(params={})
-        response = @session.do_get "#{SCOPE}.list", params
-        Slack::parse_response(response)
+      def files_list(params = {})
+        response = @session.do_post "#{SCOPE}.list", params
+        Slack.parse_response(response)
       end
 
       # Uploads or creates a file.
@@ -86,16 +86,16 @@ module Slack
       #   Slack-internal file type identifier.
       # @option params [Object] 'filename'
       #   Filename of file.
-      # @option options [Object] 'title'
+      # @option params [Object] 'title'
       #   Title of file.
       # @option params [Object] 'initial_comment'
       #   Initial comment to add to file.
       # @option params [channel] 'channels'
       #   Comma separated list of channels to share the file into.
       # @see https://api.slack.com/methods/files.upload
-      def files_upload(params={})
-        response = @session.do_get "#{SCOPE}.upload", params
-        Slack::parse_response(response)
+      def files_upload(params = {})
+        response = @session.do_post "#{SCOPE}.upload", params
+        Slack.parse_response(response)
       end
     end
   end

@@ -6,7 +6,7 @@ module Slack
     # Module for the emoji methods.
     module Emoji
       # Endpoint scope
-      SCOPE = "emoji"
+      SCOPE = 'emoji'
 
       # Lists custom emoji for a team.
       #
@@ -14,9 +14,9 @@ module Slack
       #   API call arguments
       #
       # @see https://api.slack.com/methods/emoji.list
-      def emoji_list(params={})
-        response = @session.do_get "#{SCOPE}.list", params
-        Slack::parse_response(response)
+      def emoji_list(params = {})
+        response = @session.do_post "#{SCOPE}.list", params
+        Slack.parse_response(response)
       end
     end
   end

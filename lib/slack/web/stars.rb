@@ -6,7 +6,7 @@ module Slack
     # Module for the stars methods.
     module Stars
       # Endpoint scope
-      SCOPE = "stars"
+      SCOPE = 'stars'
 
       # Lists stars for a user.
       #
@@ -20,11 +20,10 @@ module Slack
       #   Page number of results to return.
       #
       # @see https://api.slack.com/methods/stars.list
-      def stars_list(params={})
-        response = @session.do_get "#{SCOPE}.list", params
-        Slack::parse_response(response)
+      def stars_list(params = {})
+        response = @session.do_post "#{SCOPE}.list", params
+        Slack.parse_response(response)
       end
-
     end
   end
 end

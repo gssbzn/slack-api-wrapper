@@ -8,7 +8,7 @@ module Slack
     # invite users, set the topic and purpose, and mark a channel as read.
     module Channels
       # Endpoint scope
-      SCOPE = "channels"
+      SCOPE = 'channels'
 
       # Archives a channel.
       #
@@ -19,9 +19,9 @@ module Slack
       #
       # @see https://api.slack.com/methods/channels.archive
       def channels_archive(params = {})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        response = @session.do_get "#{SCOPE}.archive", params
-        Slack::parse_response(response)
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        response = @session.do_post "#{SCOPE}.archive", params
+        Slack.parse_response(response)
       end
 
       # Creates a channel.
@@ -33,9 +33,9 @@ module Slack
       #
       # @see https://api.slack.com/methods/channels.create
       def channels_create(params = {})
-        raise ArgumentError.new("Required arguments 'name' missing") if params['name'].nil?
-        response = @session.do_get "#{SCOPE}.create", params
-        Slack::parse_response(response)
+        fail ArgumentError, "Required arguments 'name' missing" if params['name'].nil?
+        response = @session.do_post "#{SCOPE}.create", params
+        Slack.parse_response(response)
       end
 
       # Fetches history of messages and events from a channel.
@@ -54,10 +54,10 @@ module Slack
       #   Number of messages to return, between 1 and 1000.
       #
       # @see https://api.slack.com/methods/channels.history
-      def channels_history(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        response = @session.do_get "#{SCOPE}.history", params
-        Slack::parse_response(response)
+      def channels_history(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        response = @session.do_post "#{SCOPE}.history", params
+        Slack.parse_response(response)
       end
 
       # Gets information about a channel.
@@ -68,10 +68,10 @@ module Slack
       #   Channel to get info on
       #
       # @see https://api.slack.com/methods/channels.info
-      def channels_info(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        response = @session.do_get "#{SCOPE}.info", params
-        Slack::parse_response(response)
+      def channels_info(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        response = @session.do_post "#{SCOPE}.info", params
+        Slack.parse_response(response)
       end
 
       # Invites a user to a channel.
@@ -84,11 +84,11 @@ module Slack
       #   User to invite to channel.
       #
       # @see https://api.slack.com/methods/channels.invite
-      def channels_invite(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'user' missing") if params['user'].nil?
-        response = @session.do_get "#{SCOPE}.invite", params
-        Slack::parse_response(response)
+      def channels_invite(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'user' missing" if params['user'].nil?
+        response = @session.do_post "#{SCOPE}.invite", params
+        Slack.parse_response(response)
       end
 
       # Joins a channel, creating it if needed.
@@ -99,10 +99,10 @@ module Slack
       #   Name of channel to join
       #
       # @see https://api.slack.com/methods/channels.join
-      def channels_join(params={})
-        raise ArgumentError.new("Required arguments 'name' missing") if params['name'].nil?
-        response = @session.do_get "#{SCOPE}.join", params
-        Slack::parse_response(response)
+      def channels_join(params = {})
+        fail ArgumentError, "Required arguments 'name' missing" if params['name'].nil?
+        response = @session.do_post "#{SCOPE}.join", params
+        Slack.parse_response(response)
       end
 
       # Removes a user from a channel.
@@ -115,11 +115,11 @@ module Slack
       #   User to remove from channel.
       #
       # @see https://api.slack.com/methods/channels.kick
-      def channels_kick(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'user' missing") if params['user'].nil?
-        response = @session.do_get "#{SCOPE}.kick", params
-        Slack::parse_response(response)
+      def channels_kick(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'user' missing" if params['user'].nil?
+        response = @session.do_post "#{SCOPE}.kick", params
+        Slack.parse_response(response)
       end
 
       # Leaves a channel.
@@ -129,10 +129,10 @@ module Slack
       # @option params [channel] 'channel'
       #   Channel to leave
       # @see https://api.slack.com/methods/channels.leave
-      def channels_leave(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        response = @session.do_get "#{SCOPE}.leave", params
-        Slack::parse_response(response)
+      def channels_leave(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        response = @session.do_post "#{SCOPE}.leave", params
+        Slack.parse_response(response)
       end
 
       # Lists all channels in a Slack team.
@@ -143,9 +143,9 @@ module Slack
       #   Don't return archived channels.
       #
       # @see https://api.slack.com/methods/channels.list
-      def channels_list(params={})
-        response = @session.do_get "#{SCOPE}.list", params
-        Slack::parse_response(response)
+      def channels_list(params = {})
+        response = @session.do_post "#{SCOPE}.list", params
+        Slack.parse_response(response)
       end
 
       # Sets the read cursor in a channel.
@@ -158,11 +158,11 @@ module Slack
       #   Timestamp of the most recently seen message.
       #
       # @see https://api.slack.com/methods/channels.mark
-      def channels_mark(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'ts' missing") if params['ts'].nil?
-        response = @session.do_get "#{SCOPE}.mark", params
-        Slack::parse_response(response)
+      def channels_mark(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'ts' missing" if params['ts'].nil?
+        response = @session.do_post "#{SCOPE}.mark", params
+        Slack.parse_response(response)
       end
 
       # Renames a channel.
@@ -175,11 +175,11 @@ module Slack
       #   New name for channel.
       #
       # @see https://api.slack.com/methods/channels.rename
-      def channels_rename(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'name' missing") if params['name'].nil?
-        response = @session.do_get "#{SCOPE}.rename", params
-        Slack::parse_response(response)
+      def channels_rename(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'name' missing" if params['name'].nil?
+        response = @session.do_post "#{SCOPE}.rename", params
+        Slack.parse_response(response)
       end
 
       # Sets the purpose for a channel.
@@ -192,11 +192,11 @@ module Slack
       #   The new purpose
       #
       # @see https://api.slack.com/methods/channels.setPurpose
-      def channels_set_purpose(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'purpose' missing") if params['purpose'].nil?
-        response = @session.do_get "#{SCOPE}.setPurpose", params
-        Slack::parse_response(response)
+      def channels_set_purpose(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'purpose' missing" if params['purpose'].nil?
+        response = @session.do_post "#{SCOPE}.setPurpose", params
+        Slack.parse_response(response)
       end
 
       # Sets the topic for a channel.
@@ -209,11 +209,11 @@ module Slack
       #   The new topic
       # @raise [ArgumentError] if 'channel' or 'topic' are not present
       # @see https://api.slack.com/methods/channels.setTopic
-      def channels_set_topic(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'topic' missing") if params['topic'].nil?
-        response = @session.do_get "#{SCOPE}.setTopic", params
-        Slack::parse_response(response)
+      def channels_set_topic(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'topic' missing" if params['topic'].nil?
+        response = @session.do_post "#{SCOPE}.setTopic", params
+        Slack.parse_response(response)
       end
 
       # Unarchives a channel.
@@ -224,12 +224,11 @@ module Slack
       #   Channel to unarchive
       # @raise [ArgumentError] if 'channel' is not present
       # @see https://api.slack.com/methods/channels.unarchive
-      def channels_unarchive(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        response = @session.do_get "#{SCOPE}.unarchive", params
-        Slack::parse_response(response)
+      def channels_unarchive(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        response = @session.do_post "#{SCOPE}.unarchive", params
+        Slack.parse_response(response)
       end
-
     end
   end
 end

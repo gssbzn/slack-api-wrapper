@@ -7,7 +7,7 @@ module Slack
     # Get info on your direct messages.
     module Im
       # Endpoint scope
-      SCOPE = "im"
+      SCOPE = 'im'
 
       # Close a direct message channel.
       #
@@ -17,10 +17,10 @@ module Slack
       #   Direct message channel to close.
       #
       # @see https://api.slack.com/methods/im.close
-      def im_close(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        response = @session.do_get "#{SCOPE}.close", params
-        Slack::parse_response(response)
+      def im_close(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        response = @session.do_post "#{SCOPE}.close", params
+        Slack.parse_response(response)
       end
 
       # Fetches history of messages and events from direct message channel.
@@ -39,10 +39,10 @@ module Slack
       #   Number of messages to return, between 1 and 1000.
       #
       # @see https://api.slack.com/methods/im.history
-      def im_history(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        response = @session.do_get "#{SCOPE}.history", params
-        Slack::parse_response(response)
+      def im_history(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        response = @session.do_post "#{SCOPE}.history", params
+        Slack.parse_response(response)
       end
 
       # Lists direct message channels for the calling user.
@@ -51,9 +51,9 @@ module Slack
       #   API call arguments
       #
       # @see https://api.slack.com/methods/im.list
-      def im_list(params={})
-        response = @session.do_get "#{SCOPE}.list", params
-        Slack::parse_response(response)
+      def im_list(params = {})
+        response = @session.do_post "#{SCOPE}.list", params
+        Slack.parse_response(response)
       end
 
       # Sets the read cursor in a direct message channel.
@@ -66,11 +66,11 @@ module Slack
       #   Timestamp of the most recently seen message.
       #
       # @see https://api.slack.com/methods/im.mark
-      def im_mark(params={})
-        raise ArgumentError.new("Required arguments 'channel' missing") if params['channel'].nil?
-        raise ArgumentError.new("Required arguments 'ts' missing") if params['ts'].nil?
-        response = @session.do_get "#{SCOPE}.mark", params
-        Slack::parse_response(response)
+      def im_mark(params = {})
+        fail ArgumentError, "Required arguments 'channel' missing" if params['channel'].nil?
+        fail ArgumentError, "Required arguments 'ts' missing" if params['ts'].nil?
+        response = @session.do_post "#{SCOPE}.mark", params
+        Slack.parse_response(response)
       end
 
       # Opens a direct message channel.
@@ -81,12 +81,11 @@ module Slack
       #   User to open a direct message channel with.
       #
       # @see https://api.slack.com/methods/im.open
-      def im_open(params={})
-        raise ArgumentError.new("Required arguments 'user' missing") if params['user'].nil?
-        response = @session.do_get "#{SCOPE}.open", params
-        Slack::parse_response(response)
+      def im_open(params = {})
+        fail ArgumentError, "Required arguments 'user' missing" if params['user'].nil?
+        response = @session.do_post "#{SCOPE}.open", params
+        Slack.parse_response(response)
       end
-
     end
   end
 end

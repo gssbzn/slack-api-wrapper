@@ -6,7 +6,7 @@ module Slack
     # Module for the teams methods.
     module Team
       # Endpoint scope
-      SCOPE = "team"
+      SCOPE = 'team'
 
       # Gets the access logs for a team.
       #
@@ -18,11 +18,19 @@ module Slack
       #   Page number of results to return.
       #
       # @see https://api.slack.com/methods/team.access_logs
-      def team_access_logs(params={})
-        response = @session.do_get "#{SCOPE}.accessLogs", params
-        Slack::parse_response(response)
+      def team_access_logs(params = {})
+        response = @session.do_post "#{SCOPE}.accessLogs", params
+        Slack.parse_response(response)
       end
 
+      # This method provides information about your team.
+      #
+      # @param [Hash] params
+      #   API call arguments
+      def team_info(params = {})
+        response = @session.do_post "#{SCOPE}.info", params
+        Slack.parse_response(response)
+      end
     end
   end
 end

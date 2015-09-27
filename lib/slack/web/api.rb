@@ -6,7 +6,7 @@ module Slack
     # Module for the api methods.
     module Api
       # Endpoint scope
-      SCOPE = "api"
+      SCOPE = 'api'
 
       # Checks API calling code.
       #
@@ -18,11 +18,10 @@ module Slack
       #   example property to return
       #
       # @see https://api.slack.com/methods/api.test
-      def api_test(params={})
-        response = @session.do_get "#{SCOPE}.test", params
-        Slack::parse_response(response)
+      def api_test(params = {})
+        response = @session.do_post "#{SCOPE}.test", params
+        Slack.parse_response(response)
       end
-
     end
   end
 end

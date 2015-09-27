@@ -1,0 +1,9 @@
+--protected
+--no-private
+--embed-mixin ClassMethods
+--markup markdown
+-
+README.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+MIT-LICENSE

@@ -6,7 +6,7 @@ module Slack
     # Module for the auth methods.
     module Auth
       # Endpoint scope
-      SCOPE = "auth"
+      SCOPE = 'auth'
 
       # Checks authentication & identity.
       #
@@ -14,9 +14,9 @@ module Slack
       #   API call arguments
       #
       # @see https://api.slack.com/methods/auth.test
-      def auth_test(params={})
-        response = @session.do_get "#{SCOPE}.test", params
-        Slack::parse_response(response)
+      def auth_test(params = {})
+        response = @session.do_post "#{SCOPE}.test", params
+        Slack.parse_response(response)
       end
     end
   end

@@ -9,6 +9,7 @@ end
 require 'slack-api-wrapper'
 
 require 'bundler/setup'
+require 'webmock/rspec'
 Bundler.require
 
 RSpec.configure do |config|

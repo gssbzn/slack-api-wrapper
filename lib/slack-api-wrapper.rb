@@ -22,6 +22,7 @@ module Slack
   # Parse response. You probably shouldn't be calling this directly.
   # This takes responses from the server and parses them.
   # It also checks for errors and raises exceptions with the appropriate messages.
+  #
   # @param [Net::HTTPResponse] response
   # @param [Boolean] raw if return raw data
   # @raise [SlackError]

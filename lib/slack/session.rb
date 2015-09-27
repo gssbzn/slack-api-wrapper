@@ -21,19 +21,6 @@ module Slack
       do_http(uri, Net::HTTP::Get.new(uri.request_uri))
     end
 
-    def do_http_with_body(uri, request, body) # :nodoc:
-      unless body.nil?
-        if body.is_a?(Hash)
-          request.set_form_data clean_params(body)
-        else
-          s = body.to_s
-          request['Content-Length'] = s.length
-          request.body = s
-        end
-      end
-      do_http(uri, request)
-    end
-
     def do_post(path, params = nil, headers = nil) # :nodoc:
       headers ||= {}
       headers['Authorization'] = "Bearer #{@access_token}"

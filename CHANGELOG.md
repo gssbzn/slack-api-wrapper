@@ -1,3 +1,6 @@
+### 0.2.0 2015-09-29
+* Add add and remove starts methods
+
 ### 0.1.0 2015-09-26
 * Remove oauth logic (use omniauth-slack instead)
 * Improve error handling and fix some bugs with them
